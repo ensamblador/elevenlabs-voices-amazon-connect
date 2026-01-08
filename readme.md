@@ -6,7 +6,7 @@ Si alguna vez has interactuado con un bot de voz y has pensado "esto suena demas
 
 En re:Invent 2025, AWS anunció tres opciones para llevar tus interacciones de voz al siguiente nivel:
 
-1. **Amazon Nova Sonic** - El modelo S2S (Speech to speech) para conversaciones naturales
+1. **Amazon Nova Sonic** - El modelo S2S (Speech to speech) de Amazon para conversaciones naturales 
 2. **ElevenLabs** - Síntesis de voz de alta calidad (TTS: Text to Speech)
 3. **Deepgram** - Reconocimiento de voz de terceros con precisión mejorada (STT: Speech to text)
 
@@ -23,7 +23,7 @@ ElevenLabs es conocido por sus voces sintéticas de altísima calidad y expresiv
 - Soporte para español con acentos regionales. Escucha las opciones de acentos, tono, género y edad en el sitio [elevenlabs.io](https://elevenlabs.io/app/voice-library?required_languages=es). Por ejemplo [México](https://elevenlabs.io/app/voice-library?voiceId=YKUjKbMlejgvkOZlnnvt) 🇲🇽 [Chile](https://elevenlabs.io/app/voice-library?voiceId=cLzIVykddLltvgkzos6C) 🇨🇱 [Colombia](https://elevenlabs.io/app/voice-library?voiceId=57D8YIbQSuE3REDPO6Vm) 🇨🇴 [Argentina](https://elevenlabs.io/app/voice-library?voiceId=9oPKasc15pfAbMr7N6Gs) 🇦🇷. 
 - Además de todas estas opciones, puedes [Clonar una voz](https://elevenlabs.io/voice-cloning)
 
-Ahora puedes usarlo directamente en tus flujos de contacto de Amazon Connect.
+Ahora puedes usarlo directamente en tus flujos de contacto de Amazon Connect y en los Bots de Amazon Lex utilizados en el flujo. A continuación te explico como:
 
 ## Configurando las voces de Eleven Labs en Amazon Connect.
 
@@ -58,12 +58,12 @@ Esta es la documentación oficial que usaremos de base: [Configure third-party t
 
 La configuración final de **Set Voice** queda como en la siguiente imagen (pudes modificar el modelo y la voz para probar otras opciones):
 
-![](img/set_voice_eleven_labs.png)
+<img src="img/set_voice_eleven_labs.png" width="400">
 
 Ahora ya puedes probar un **Play Prompt** con un mensaje, incluso puedes cambiar la voz dinámicamente y varias veces en un contacto:
 
+<img src="img/play_prmpt.png" width="300">
 
-![](img/play_prmpt.png)
 
 ### Paso 2: Asocia el flujo a un número telefónico y realiza una llamada.
 
@@ -76,6 +76,10 @@ Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 
 
 
 [Abre el video en tu Navegador](https://private-user-images.githubusercontent.com/10731538/533219354-8a30009c-9fda-44e0-a6ef-99cee9e2a106.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4NTYyODMsIm5iZiI6MTc2Nzg1NTk4MywicGF0aCI6Ii8xMDczMTUzOC81MzMyMTkzNTQtOGEzMDAwOWMtOWZkYS00NGUwLWE2ZWYtOTljZWU5ZTJhMTA2Lm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDA3MDYyM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTk4Y2ZhMjJmNDU4YzQ3ZjFiZDVmNDhmMDJhYzg0YzdmODMyNmM4MjZhZjJmYmJmNjRkNjNmZTAyYWE1ODNhOGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.g4rR4vjqH_YbcOfRl3Ftbi72PLaUdcuisi6LYS3dV3c)
+
+### Paso 3: Usa La voz en Amazon Lex
+
+
 
 ## Consideraciones de Costos
 
