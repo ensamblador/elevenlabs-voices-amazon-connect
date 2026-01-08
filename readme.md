@@ -70,7 +70,7 @@ Ahora ya puedes probar un **Play Prompt** con un mensaje, incluso puedes cambiar
 Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 y eleven_multilingual_v2 y considerando voces de 3 países diferentes.
 
 <video width="640" height="480" controls>
-  <source src="media/demo_eleven_labs.mp4" type="video/mp4">
+  <source src="https://github.com/ensamblador/elevenlabs-voices-amazon-connect/raw/refs/heads/main/img/demo_eleven_labs.mp4?raw=true" type="video/mp4">
   Tu navegador no soporta el elemento de video.
 </video>
 
