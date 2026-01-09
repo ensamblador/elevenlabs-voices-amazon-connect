@@ -1,20 +1,16 @@
 # Integrando Amazon Connect con voces Eleven Labs en español.
 
 <br/><br/>
----
-<br/><br/>
-
-
 
 Cuántas veces vez has interactuado con un bot de voz y has pensado "esto suena demasiado robótico"? En mercados hispanohablantes, esto se agrava cuando un bot intenta hablar español con acento neutro genérico o peor aún, con pronunciación incorrecta de términos locales.
 
 **La buena noticia:** La tecnología finalmente está alcanzando nuestras expectativas.
 
 <br/><br/>
----
-<br/><br/>
 
 ## ¿Qué hay de nuevo?
+
+<br/><br/>
 
 En re:Invent 2025, AWS anunció para Amazon Connect tres opciones para llevar tus interacciones de voz al siguiente nivel:
 
@@ -26,8 +22,11 @@ Es decir, además de Nova Sonic, Amazon Connect ahora te permite integrar provee
 
 Hoy vamos a profundizar en cómo utilizar voces de Eleven Labs dentro de la experiencia de una llamada telefónica con Amazon Connect. 
 
+<br/><br/>
+
 ## ElevenLabs.io
 
+<br/><br/>
 ElevenLabs es conocido por sus voces sintéticas de altísima calidad y expresividad. 
 
 **Características clave:**
@@ -37,7 +36,11 @@ ElevenLabs es conocido por sus voces sintéticas de altísima calidad y expresiv
 
 Ahora puedes usarlo directamente en tus flujos de contacto de Amazon Connect y en los Bots de Amazon Lex utilizados en el flujo. 
 
+<br/><br/>
+
 ## Configurando las voces de Eleven Labs en Amazon Connect.
+
+<br/><br/>
 
 Esta es la documentación oficial que usaremos de base: [Configure third-party text-to-speech (TTS) providers](https://docs.aws.amazon.com/connect/latest/adminguide/configure-third-party-tts.html) y realizaremos los cambios necesarios para escuchar las voces en español.
 
@@ -54,8 +57,12 @@ Esta es la documentación oficial que usaremos de base: [Configure third-party t
 
 
 
+<br/><br/>
 
 ### Paso 1: Configura el proveedor en tu flujo de Connect
+
+<br/><br/>
+
 
 1. Abre tu flujo de contacto en Amazon Connect
 2. Agrega o edita un bloque **Set Voice**
@@ -84,7 +91,11 @@ Ahora ya puedes probar un **Play Prompt** con un mensaje, incluso puedes cambiar
 <img src="img/play_prmpt.png" width="300">
 </div>
 
+<br/><br/>
+
 ### Paso 2: Asocia el flujo a un número telefónico y realiza una llamada.
+
+<br/><br/>
 
 Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 y eleven_multilingual_v2 y considerando voces de 3 países diferentes.
 
@@ -105,12 +116,17 @@ Estas son las posibilidades actuales con la integración de voces de terceros en
 
 [Abre el video en tu Navegador](https://private-user-images.githubusercontent.com/10731538/533219354-8a30009c-9fda-44e0-a6ef-99cee9e2a106.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4NTYyODMsIm5iZiI6MTc2Nzg1NTk4MywicGF0aCI6Ii8xMDczMTUzOC81MzMyMTkzNTQtOGEzMDAwOWMtOWZkYS00NGUwLWE2ZWYtOTljZWU5ZTJhMTA2Lm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDA3MDYyM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTk4Y2ZhMjJmNDU4YzQ3ZjFiZDVmNDhmMDJhYzg0YzdmODMyNmM4MjZhZjJmYmJmNjRkNjNmZTAyYWE1ODNhOGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.g4rR4vjqH_YbcOfRl3Ftbi72PLaUdcuisi6LYS3dV3c)
 
+
+<br/><br/><br/><br/>
+
 ## Usando Agente de IA dentro de Amazon Connect
+<br/><br/>
 
 Para incorporar la voz dentro de las interacciones con Amazon Lex debemos realizar algunos pasos adicionales.
 
-
+<br/><br/>
 ### Recomendaciones
+<br/><br/>
 
 - Primero asegura que la voz funciona en **Play prompt** de Amazon Connect antes de pasar a configurar tu bot de Amazon Lex.
 - Asegúrate que la gestión de los bots se realiza dentro de Connect. Esto lo puedes validar en la consola de Amazon Connect >> [Instancia] >> flows. De esta forma Amazon Connect Maneja los  roles y permisos necesarios.
@@ -120,7 +136,10 @@ Para incorporar la voz dentro de las interacciones con Amazon Lex debemos realiz
 <img src="img/enable_bot_management.png" width="600" >
 </div>
 
+<br/><br/>
+
 ## Paso 1: Crea o configura un Bot de IA Conversacional en Amazon Connect
+<br/><br/>
 
 
 <div align="center">
@@ -151,8 +170,10 @@ Para incorporar la voz dentro de las interacciones con Amazon Lex debemos realiz
 
 Nota: Estamos usando un modelo específico para Síntesis de Voz, en este paso le indicamos a Lex que modelo debería utilizar para Reconocimiento de Voz.
 
+<br/><br/>
 
 ## Paso 2: Utiliza este Bot de IA Conversacional en un Flujo de Amazon Connect.
+<br/><br/>
 
 Configura el Bloque **Get Customer Input** con Lex como de costumbre:
 
@@ -162,8 +183,11 @@ Configura el Bloque **Get Customer Input** con Lex como de costumbre:
 
 Es decir, esta parte no cambia. Debemos asegurar que la voz se encuentra establecida previo al bloque en **Set Voice** [Paso 1](#paso-1-configura-el-proveedor-en-tu-flujo-de-connect)
 
+<br/><br/>
 
-### Paso 2: Asocia el flujo a un número telefónico y realiza una llamada.
+### Paso 3: Asocia el flujo a un número telefónico y realiza una llamada.
+
+<br/><br/>
 
 Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 y eleven_multilingual_v2 y considerando voces de 3 países diferentes.
 
@@ -179,13 +203,22 @@ Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 
 
 Si quieres construir una experiencia similar a esta llamada de demo, puedes hacerlo siguiendo este workshop: [Building Intelligent Customer Service with Agentic AI on Amazon Connect](https://catalog.workshops.aws/self-service-ai-agents/en-US)
 
+
+<br/><br/>
+<br/><br/>
+
 ## Consideraciones de Costos
+<br/><br/>
 
 - Facturación de uso de síntesis de voz es directamente con el proveedor Eleven Labs. Precios según el plan que contrates con ellos (aunque esta prueba la realicé con su capa gratuita)
 - El acceso a configurar la integración está incluido en Connect Unlimited AI
 
+<br/><br/>
+<br/><br/>
 
 ## Recursos Adicionales
+
+<br/><br/>
 
 ### Documentación Oficial:
 
@@ -202,6 +235,9 @@ Si quieres construir una experiencia similar a esta llamada de demo, puedes hace
 
 - **[BIZ 221](https://www.youtube.com/watch?v=sq5FNe2_JzI)**: Agentic AI advancements in customer experience with Amazon Connect
 
+<br/><br/>
+***
+<br/><br/>
 
 ¿Tienes preguntas sobre cómo implementar estas nuevas voces en tu contact center? ¿Quieres compartir tu experiencia? Déjame un comentario abajo o contáctame directamente. 
 
