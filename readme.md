@@ -1,10 +1,13 @@
 # Integrando Amazon Connect con voces Eleven Labs en español.
 
-Si alguna vez has interactuado con un bot de voz y has pensado "esto suena demasiado robótico", tengo excelentes noticias para ti. 
+Cuántas veces vez has interactuado con un bot de voz y has pensado "esto suena demasiado robótico"? En mercados hispanohablantes, esto se agrava cuando un bot intenta hablar español con acento neutro genérico o peor aún, con pronunciación incorrecta de términos locales.
+
+**La buena noticia:** La tecnología finalmente está alcanzando nuestras expectativas.
+
 
 ## ¿Qué hay de nuevo?
 
-En re:Invent 2025, AWS anunció tres opciones para llevar tus interacciones de voz al siguiente nivel:
+En re:Invent 2025, AWS anunció para Amazon Connect tres opciones para llevar tus interacciones de voz al siguiente nivel:
 
 1. **Amazon Nova Sonic** - El modelo S2S (Speech to speech) de Amazon para conversaciones naturales 
 2. **ElevenLabs** - Síntesis de voz de alta calidad (TTS: Text to Speech)
@@ -23,7 +26,7 @@ ElevenLabs es conocido por sus voces sintéticas de altísima calidad y expresiv
 - Soporte para español con acentos regionales. Escucha las opciones de acentos, tono, género y edad en el sitio [elevenlabs.io](https://elevenlabs.io/app/voice-library?required_languages=es). Por ejemplo [México](https://elevenlabs.io/app/voice-library?voiceId=YKUjKbMlejgvkOZlnnvt) 🇲🇽 [Chile](https://elevenlabs.io/app/voice-library?voiceId=cLzIVykddLltvgkzos6C) 🇨🇱 [Colombia](https://elevenlabs.io/app/voice-library?voiceId=57D8YIbQSuE3REDPO6Vm) 🇨🇴 [Argentina](https://elevenlabs.io/app/voice-library?voiceId=9oPKasc15pfAbMr7N6Gs) 🇦🇷. 
 - Además de todas estas opciones, puedes [Clonar una voz](https://elevenlabs.io/voice-cloning)
 
-Ahora puedes usarlo directamente en tus flujos de contacto de Amazon Connect y en los Bots de Amazon Lex utilizados en el flujo. A continuación te explico como:
+Ahora puedes usarlo directamente en tus flujos de contacto de Amazon Connect y en los Bots de Amazon Lex utilizados en el flujo. 
 
 ## Configurando las voces de Eleven Labs en Amazon Connect.
 
