@@ -26,7 +26,6 @@ Hoy vamos a profundizar en cómo utilizar voces de Eleven Labs dentro de la expe
 
 ## ElevenLabs.io
 
-<br/><br/>
 ElevenLabs es conocido por sus voces sintéticas de altísima calidad y expresividad. 
 
 **Características clave:**
@@ -61,9 +60,6 @@ Esta es la documentación oficial que usaremos de base: [Configure third-party t
 
 ### Paso 1: Configura el proveedor en tu flujo de Connect
 
-<br/><br/>
-
-
 1. Abre tu flujo de contacto en Amazon Connect
 2. Agrega o edita un bloque **Set Voice**
 3. Selecciona **Voice Provider: ElevenLabs**
@@ -95,8 +91,6 @@ Ahora ya puedes probar un **Play Prompt** con un mensaje, incluso puedes cambiar
 
 ### Paso 2: Asocia el flujo a un número telefónico y realiza una llamada.
 
-<br/><br/>
-
 Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 y eleven_multilingual_v2 y considerando voces de 3 países diferentes.
 
 
@@ -126,7 +120,6 @@ Para incorporar la voz dentro de las interacciones con Amazon Lex debemos realiz
 
 <br/><br/>
 ### Recomendaciones
-<br/><br/>
 
 - Primero asegura que la voz funciona en **Play prompt** de Amazon Connect antes de pasar a configurar tu bot de Amazon Lex.
 - Asegúrate que la gestión de los bots se realiza dentro de Connect. Esto lo puedes validar en la consola de Amazon Connect >> [Instancia] >> flows. De esta forma Amazon Connect Maneja los  roles y permisos necesarios.
@@ -138,7 +131,7 @@ Para incorporar la voz dentro de las interacciones con Amazon Lex debemos realiz
 
 <br/><br/>
 
-## Paso 1: Crea o configura un Bot de IA Conversacional en Amazon Connect
+### Paso 1: Crea o configura un Bot de IA Conversacional en Amazon Connect
 <br/><br/>
 
 
@@ -168,12 +161,12 @@ Para incorporar la voz dentro de las interacciones con Amazon Lex debemos realiz
 <img src="img/advanced_bot_config.png" width="600" >
 </div>
 
-Nota: Estamos usando un modelo específico para Síntesis de Voz, en este paso le indicamos a Lex que modelo debería utilizar para Reconocimiento de Voz.
+Nota: Estamos usando un modelo específico para Síntesis de Voz (eleven Labs). En este paso le indicamos a Lex que modelo debería utilizar para Reconocimiento de Voz.
 
 <br/><br/>
 
-## Paso 2: Utiliza este Bot de IA Conversacional en un Flujo de Amazon Connect.
-<br/><br/>
+### Paso 2: Utiliza este Bot de IA Conversacional en un Flujo de Amazon Connect.
+
 
 Configura el Bloque **Get Customer Input** con Lex como de costumbre:
 
@@ -187,9 +180,7 @@ Es decir, esta parte no cambia. Debemos asegurar que la voz se encuentra estable
 
 ### Paso 3: Asocia el flujo a un número telefónico y realiza una llamada.
 
-<br/><br/>
-
-Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 y eleven_multilingual_v2 y considerando voces de 3 países diferentes.
+Este es un ejemplo de llamado usando el modelo: **eleven_multilingual_v2** con una voz en español de Chile en un flujo de autoatención de IA Conversacional 
 
 
 <div align="center">
@@ -239,6 +230,6 @@ Si quieres construir una experiencia similar a esta llamada de demo, puedes hace
 ***
 <br/><br/>
 
-¿Tienes preguntas sobre cómo implementar estas nuevas voces en tu contact center? ¿Quieres compartir tu experiencia? Déjame un comentario abajo o contáctame directamente. 
+Let's Build!
 
 
