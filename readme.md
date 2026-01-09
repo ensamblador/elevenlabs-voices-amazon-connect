@@ -36,7 +36,12 @@ Esta es la documentación oficial que usaremos de base: [Configure third-party t
 3. API Key de Eleven Labs que usará Amazon Connect para generar las voces:
     1. Ir a https://elevenlabs.io/app/developers/api-keys y crear una nueva clave. 
     ![](img/eleven_labs_ak.png)
-4. Almacena el API Key en [AWS Secrets Manager](https://docs.aws.amazon.com/connect/latest/adminguide/managing-secrets-resource-policies.html) ( Sigue los pasos para crear el secret y autorizar a Amazon Connect para leerlo)
+4. Almacena el API Key en [AWS Secrets Manager](https://docs.aws.amazon.com/connect/latest/adminguide/managing-secrets-resource-policies.html) ( Sigue los pasos para crear el secret y autorizar a Amazon Connect para leerlo).
+    1. El secreto debe tener 2 claves: **apiToken** (el key de Eleven Labs) y **apiTokenRegion**: us para Latinoamérica.
+    ![](img/secrets_api_key.png)
+
+
+
 
 ### Paso 1: Configura el proveedor en tu flujo de Connect
 
@@ -57,12 +62,93 @@ Esta es la documentación oficial que usaremos de base: [Configure third-party t
     - Language: Spanish (United States)
 
 La configuración final de **Set Voice** queda como en la siguiente imagen (pudes modificar el modelo y la voz para probar otras opciones):
-
+<div align="center">
 <img src="img/set_voice_eleven_labs.png" width="400">
+</div>
 
 Ahora ya puedes probar un **Play Prompt** con un mensaje, incluso puedes cambiar la voz dinámicamente y varias veces en un contacto:
 
+<div align="center">
 <img src="img/play_prmpt.png" width="300">
+</div>
+
+### Paso 2: Asocia el flujo a un número telefónico y realiza una llamada.
+
+Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 y eleven_multilingual_v2 y considerando voces de 3 países diferentes.
+
+
+
+```
+[AUDIO x 6]
+Hola Que tal?
+Yo soy una voz de Eleven Labs, con una acento {......}. 
+Estas son las posibilidades actuales con la integración de voces de terceros en Amazon Connect. 
+```
+
+<div align="center">
+<video width="300" height="480" controls>
+  <source src="img/demo_eleven_labs.mp4" type="video/mp4">
+</video>
+</div>
+
+[Abre el video en tu Navegador](https://private-user-images.githubusercontent.com/10731538/533219354-8a30009c-9fda-44e0-a6ef-99cee9e2a106.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4NTYyODMsIm5iZiI6MTc2Nzg1NTk4MywicGF0aCI6Ii8xMDczMTUzOC81MzMyMTkzNTQtOGEzMDAwOWMtOWZkYS00NGUwLWE2ZWYtOTljZWU5ZTJhMTA2Lm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDA3MDYyM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTk4Y2ZhMjJmNDU4YzQ3ZjFiZDVmNDhmMDJhYzg0YzdmODMyNmM4MjZhZjJmYmJmNjRkNjNmZTAyYWE1ODNhOGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.g4rR4vjqH_YbcOfRl3Ftbi72PLaUdcuisi6LYS3dV3c)
+
+## Usando Agente de IA dentro de Amazon Connect
+
+Para incorporar la voz dentro de las interacciones con Amazon Lex debemos realiza algunos pasos adicionales.
+
+
+### Recomendaciones
+
+- Primero asegura que la voz funciona en play prompt de connect antes de pasar a configurar tu bot de Amazon Lex.
+- Asegúrate que la gestión de los bots se realiza dentro de Connect. Esto lo puedes validar en la consola de Amazon Connect >> [Instancia] >> flows. De esta forma Amazon Connect Maneja los  roles y permisos necesarios.
+
+
+<div align="center">
+<img src="img/enable_bot_management.png" width="600" >
+</div>
+
+## Paso 1: Crea o configura un Bot de IA Conversacional en Amazon Connect
+
+
+<div align="center">
+<img src="img/crea_conversartional_ai.png" width="600" >
+</div>
+
+
+1. Agrega (si no lo has hecho) lenguage **Spanish (US)**. El lenguage debe ser el mismo que seleccionaste en **Set Voice** de Amazon Connect (variable "language"="es_US se utiliza para identificar cuál idioma del bot se invoca desde Amazon Connect).
+2. Crea un Intent Básico, algo como un **SaludoIntent** 
+2. Ahora ve a la **Configuracion Avanzada**
+
+<div align="center">
+<img src="img/saludo_intent.png" width="600" >
+</div>
+
+<div align="center">
+<img src="img/bot_creation.png" width="600" >
+</div>
+
+
+3. Selecciona el lenguage **Spanish (US)** y edita la sección **Language details**
+4. En **Speech Recognition (ASR)** Selecciona **Neural**
+5. **Save** y **Build**.
+
+<div align="center">
+<img src="img/advanced_bot_config.png" width="600" >
+</div>
+
+Nota: Estamos usando un modelo específico para Síntesis de Voz, en este paso le indicamos a Lex que modelo debería utilizar para Reconocimiento de Voz.
+
+
+## Paso 2: Utiliza este Bot de IA Conversacional en un Flujo de Amazon Connect.
+
+Configura el Bloque **Get Customer Input** con Lex como de costumbre:
+
+<div align="center">
+<img src="img/get_customer_input.png" width="400" >
+</div>
+
+Es decir, esta parte no cambia. Debemos asegurar que la voz se encuentra establecida previo al bloque en **Set Voice** [Paso 1](#paso-1-configura-el-proveedor-en-tu-flujo-de-connect)
 
 
 ### Paso 2: Asocia el flujo a un número telefónico y realiza una llamada.
@@ -70,16 +156,16 @@ Ahora ya puedes probar un **Play Prompt** con un mensaje, incluso puedes cambiar
 Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 y eleven_multilingual_v2 y considerando voces de 3 países diferentes.
 
 
-<video width="640" height="480" controls>
-  <source src="img/demo_eleven_labs.mp4" type="video/mp4">
+<div align="center">
+<video width="300" height="480" controls>
+  <source src="img/demo_conversational_ai.mp4" type="video/mp4">
 </video>
+</div>
+
+[Abre el video en tu Navegador](https://private-user-images.githubusercontent.com/10731538/533681173-d8123b98-2eba-4075-bfba-59d09a4385ca.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc5MjQ2NjAsIm5iZiI6MTc2NzkyNDM2MCwicGF0aCI6Ii8xMDczMTUzOC81MzM2ODExNzMtZDgxMjNiOTgtMmViYS00MDc1LWJmYmEtNTlkMDlhNDM4NWNhLm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA5VDAyMDYwMFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTM4NGQyMGVjYTBiY2Y2Zjk0ZmVkMWQyNTQ4MjgxM2NhNWQ2ZmE3YmE5ZTE0YmNjMDZjZjVmNWJjYjVjZDQ4MmImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.GNXyqw9eLC6TkWbHyqFQks5_dAsAgUdXj2TS5DFsrn4)
 
 
-[Abre el video en tu Navegador](https://private-user-images.githubusercontent.com/10731538/533219354-8a30009c-9fda-44e0-a6ef-99cee9e2a106.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4NTYyODMsIm5iZiI6MTc2Nzg1NTk4MywicGF0aCI6Ii8xMDczMTUzOC81MzMyMTkzNTQtOGEzMDAwOWMtOWZkYS00NGUwLWE2ZWYtOTljZWU5ZTJhMTA2Lm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDA3MDYyM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTk4Y2ZhMjJmNDU4YzQ3ZjFiZDVmNDhmMDJhYzg0YzdmODMyNmM4MjZhZjJmYmJmNjRkNjNmZTAyYWE1ODNhOGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.g4rR4vjqH_YbcOfRl3Ftbi72PLaUdcuisi6LYS3dV3c)
-
-### Paso 3: Usa La voz en Amazon Lex
-
-
+Si quieres construir una experiencia similar a esta llamada de demo, puedes hacerlo siguiendo este workshop: [Building Intelligent Customer Service with Agentic AI on Amazon Connect](https://catalog.workshops.aws/self-service-ai-agents/en-US)
 
 ## Consideraciones de Costos
 
@@ -87,43 +173,11 @@ Este es un ejemplo de llamado usando dos modelos diferentes : eleven_turbo_v2_5 
 - El acceso a configurar la integración está incluido en Connect Unlimited AI
 
 
-**Descripción del audio**: Conversación natural con tono amigable, sin pausas robóticas, con entonación que refleja empatía y profesionalismo.
-
----
-
-#### ElevenLabs - Voz Personalizada
-**Escenario**: Mensaje de bienvenida
-
-```
-[AUDIO PLAYER]
-Bot: "Bienvenido a TechSupport Plus. Mi nombre es Ana y estoy aquí para ayudarte a resolver cualquier problema técnico que tengas. Por favor, cuéntame qué está pasando y trabajaremos juntos para solucionarlo."
-```
-
-**Descripción del audio**: Voz cálida y profesional con excelente claridad, pronunciación perfecta y ritmo natural.
-
----
-
-#### Comparación: TTS Tradicional vs Nova Sonic
-**Escenario**: Misma frase con diferentes tecnologías
-
-```
-[AUDIO PLAYER - SPLIT COMPARISON]
-TTS Tradicional: "Su. Solicitud. Ha. Sido. Procesada. Exitosamente. Recibirá. Una. Confirmación. Por. Correo. Electrónico."
-
-Nova Sonic: "Tu solicitud ha sido procesada exitosamente. Recibirás una confirmación por correo electrónico en los próximos minutos."
-```
-
-**Descripción del audio**: Comparación lado a lado mostrando la diferencia dramática en naturalidad, fluidez y expresividad.
-
----
-
 ## Recursos Adicionales
 
 ### Documentación Oficial:
 
-- [Configurar Amazon Nova Sonic](https://docs.aws.amazon.com/connect/latest/adminguide/nova-sonic-speech-to-speech.html)
 - [Configurar proveedores TTS de terceros](https://docs.aws.amazon.com/connect/latest/adminguide/configure-third-party-tts.html)
-- [Configurar proveedores STT de terceros](https://docs.aws.amazon.com/connect/latest/adminguide/configure-third-party-stt.html)
 - [Endpoints y regiones para proveedores de terceros](https://docs.aws.amazon.com/connect/latest/adminguide/endpoints-regions-third-party-stt.html)
 
 ### Blogs y Anuncios:
@@ -134,21 +188,9 @@ Nova Sonic: "Tu solicitud ha sido procesada exitosamente. Recibirás una confirm
 
 ### Sesiones de re:Invent:
 
-- **BIZ 221**: Agentic AI advancements in customer experience with Amazon Connect
+- **[BIZ 221](https://www.youtube.com/watch?v=sq5FNe2_JzI)**: Agentic AI advancements in customer experience with Amazon Connect
 
-## Conclusión
 
-Las nuevas capacidades de voz en Amazon Connect representan un salto cualitativo en cómo podemos servir a nuestros clientes hispanohablantes. Ya sea que elijas Amazon Nova Sonic para conversaciones completamente naturales, o combines ElevenLabs y Deepgram para casos de uso especializados, ahora tienes las herramientas para crear experiencias de voz que realmente deleiten a tus clientes.
-
-Lo mejor de todo: estas tecnologías están disponibles **ahora mismo** y son fáciles de implementar. No necesitas ser un experto en IA o machine learning para empezar a usarlas.
-
-### Próximos Pasos:
-
-1. **Evalúa** tus casos de uso actuales y identifica dónde las voces naturales pueden tener mayor impacto
-2. **Prueba** Nova Sonic en un ambiente de desarrollo con tus propios flujos
-3. **Compara** las diferentes opciones con llamadas de prueba reales
-4. **Implementa** gradualmente, empezando con un flujo de bajo riesgo
-5. **Mide** el impacto en satisfacción del cliente y eficiencia operativa
 
 ¿Tienes preguntas sobre cómo implementar estas nuevas voces en tu contact center? ¿Quieres compartir tu experiencia? Déjame un comentario abajo o contáctame directamente. Estoy aquí para ayudarte a llevar tu experiencia de cliente al siguiente nivel.
 
