@@ -1,16 +1,25 @@
 # Integrando Amazon Connect con voces Eleven Labs en español.
 
+<br/><br/>
+---
+<br/><br/>
+
+
+
 Cuántas veces vez has interactuado con un bot de voz y has pensado "esto suena demasiado robótico"? En mercados hispanohablantes, esto se agrava cuando un bot intenta hablar español con acento neutro genérico o peor aún, con pronunciación incorrecta de términos locales.
 
 **La buena noticia:** La tecnología finalmente está alcanzando nuestras expectativas.
 
+<br/><br/>
+---
+<br/><br/>
 
 ## ¿Qué hay de nuevo?
 
 En re:Invent 2025, AWS anunció para Amazon Connect tres opciones para llevar tus interacciones de voz al siguiente nivel:
 
 1. **Amazon Nova Sonic** - El modelo S2S (Speech to speech) de Amazon para conversaciones naturales 
-2. **ElevenLabs** - Síntesis de voz de alta calidad (TTS: Text to Speech)
+2. **ElevenLabs** - Síntesis de voz de alta calidad (TTS: Text to Speech). El tema de este blog.
 3. **Deepgram** - Reconocimiento de voz de terceros con precisión mejorada (STT: Speech to text)
 
 Es decir, además de Nova Sonic, Amazon Connect ahora te permite integrar proveedores de terceros para casos de uso especializados. Esto te da flexibilidad total mientras mantienes toda la orquestación, analítica y compliance de Amazon Connect.
