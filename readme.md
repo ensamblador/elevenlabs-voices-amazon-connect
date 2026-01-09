@@ -95,12 +95,12 @@ Estas son las posibilidades actuales con la integración de voces de terceros en
 
 ## Usando Agente de IA dentro de Amazon Connect
 
-Para incorporar la voz dentro de las interacciones con Amazon Lex debemos realiza algunos pasos adicionales.
+Para incorporar la voz dentro de las interacciones con Amazon Lex debemos realizar algunos pasos adicionales.
 
 
 ### Recomendaciones
 
-- Primero asegura que la voz funciona en play prompt de connect antes de pasar a configurar tu bot de Amazon Lex.
+- Primero asegura que la voz funciona en **Play prompt** de Amazon Connect antes de pasar a configurar tu bot de Amazon Lex.
 - Asegúrate que la gestión de los bots se realiza dentro de Connect. Esto lo puedes validar en la consola de Amazon Connect >> [Instancia] >> flows. De esta forma Amazon Connect Maneja los  roles y permisos necesarios.
 
 
@@ -191,13 +191,6 @@ Si quieres construir una experiencia similar a esta llamada de demo, puedes hace
 - **[BIZ 221](https://www.youtube.com/watch?v=sq5FNe2_JzI)**: Agentic AI advancements in customer experience with Amazon Connect
 
 
+¿Tienes preguntas sobre cómo implementar estas nuevas voces en tu contact center? ¿Quieres compartir tu experiencia? Déjame un comentario abajo o contáctame directamente. 
 
-¿Tienes preguntas sobre cómo implementar estas nuevas voces en tu contact center? ¿Quieres compartir tu experiencia? Déjame un comentario abajo o contáctame directamente. Estoy aquí para ayudarte a llevar tu experiencia de cliente al siguiente nivel.
 
-¡Hasta la próxima!
-
----
-
-**Sobre el autor**: Arquitecto de Soluciones Senior de Amazon Connect para Latinoamérica, especializado en IA conversacional y experiencia del cliente. Apasionado por ayudar a empresas a transformar sus contact centers con tecnología de punta.
-
-**Tags**: #AmazonConnect #NovaSonic #ContactCenter #IA #VoiceAI #CustomerExperience #AWS #Latinoamérica #ElevenLabs #Deepgram
